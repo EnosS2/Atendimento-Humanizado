@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Atendimento Humanizado - HealthTwin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../src/styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-dot"></span>
+          <div>
+            <p class="brand-name">HealthTwin</p>
+            <p class="brand-tag">Atendimento humanizado</p>
+          </div>
+        </div>
+        <nav class="top-nav">
+          <button class="nav-btn is-active" data-screen="dashboard">Dashboard</button>
+          <button class="nav-btn" data-screen="consulta">Consulta</button>
+          <button class="nav-btn" data-screen="populacional">Populacao</button>
+          <button class="nav-btn" data-screen="paciente">Paciente</button>
+        </nav>
+        <div class="top-actions">
+          <input class="search" type="search" placeholder="Buscar paciente" />
+          <button class="ghost demo-toggle" id="demoToggle">Modo demo</button>
+          <button class="pill">Emergency Alert</button>
+        </div>
+      </header>
+
+      <main>
+        <section class="screen is-visible" id="dashboard">
+          <div class="layout">
+            <aside class="sidebar">
+              <div class="profile">
+                <div class="avatar">DS</div>
+                <div>
+                  <p class="profile-name">Dr. Smith</p>
+                  <p class="profile-sub">Oncologia</p>
+                </div>
+              </div>
+              <div class="menu">
+                <button class="menu-btn is-active">Dashboard</button>
+                <button class="menu-btn">Consulta Clinica</button>
+                <button class="menu-btn">Gestao de Unidade</button>
+                <button class="menu-btn">Relatorios</button>
+              </div>
+              <button class="cta">+ Nova Consulta</button>
+              <div class="menu secondary">
+                <button class="menu-btn">Configuracoes</button>
+                <button class="menu-btn">Suporte</button>
+              </div>
+            </aside>
+
+            <div class="content">
+              <section class="hero-card">
+                <div>
+                  <p class="eyebrow">Paciente</p>
+                  <h1 data-dashboard-patient>Joao da Silva, 58 anos</h1>
+                  <p class="muted" data-dashboard-context>
+                    Contexto: aposentado, mora com a esposa, baixa rede de apoio.
+                  </p>
+                </div>
+                <button class="primary">Iniciar Consulta</button>
+              </section>
+
+              <section class="alerts stagger" data-dashboard-alerts></section>
+
+              <section class="grid stagger">
+                <article class="card">
+                  <header class="card-header">
+                    <p class="card-title">Gemeo Digital</p>
+                    <p class="muted">Score global</p>
+                  </header>
+                  <div class="score">
+                    <div class="score-ring" data-score-ring>
+                      <div>
+                        <p class="score-number" data-score-number>72</p>
+                        <p class="muted">Score global</p>
+                      </div>
+                    </div>
+                    <div class="score-bars" data-score-bars></div>
+                  </div>
+                </article>
+
+                <article class="card">
+                  <header class="card-header">
+                    <p class="card-title">Linha do Tempo Clinica</p>
+                    <button class="ghost">Atualizar</button>
+                  </header>
+                  <ul class="timeline" data-dashboard-timeline></ul>
+                </article>
+
+                <article class="card">
+                  <header class="card-header">
+                    <p class="card-title">Acoes Prioritarias</p>
+                    <p class="muted">Proximas 2 semanas</p>
+                  </header>
+                  <div class="actions" data-dashboard-actions></div>
+                  <div class="mini-cards" data-dashboard-mini></div>
+                </article>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <section class="screen" id="consulta">
+          <div class="layout">
+            <aside class="sidebar">
+              <div class="profile">
+                <div class="avatar">ER</div>
+                <div>
+                  <p class="profile-name" data-consulta-name>Elena Rocha</p>
+                  <p class="profile-sub" data-consulta-sub>62 anos - HAS, Diabetes</p>
+                </div>
+              </div>
+              <div class="alert warning">
+                <p class="alert-title" data-consulta-alert-title>
+                  Ativo: Pressao sistolica 155 mmHg
+                </p>
+                <p class="muted" data-consulta-alert-text>
+                  Detectado via monitoramento remoto.
+                </p>
+              </div>
+              <div class="card compact">
+                <p class="card-title">Insights</p>
+                <ul class="list" data-consulta-insights></ul>
+              </div>
+              <button class="cta">+ Nova Consulta</button>
+            </aside>
+
+            <div class="content">
+              <section class="grid two stagger">
+                <article class="card">
+                  <header class="card-header">
+                    <p class="card-title">Atendimento e Conduta Clinica</p>
+                    <p class="muted">Escuta ativa e registro humanizado</p>
+                  </header>
+                  <label class="field">
+                    <span>Anotacoes livres</span>
+                    <textarea placeholder="Relato da paciente..."></textarea>
+                  </label>
+                  <div class="row">
+                    <label class="field">
+                      <span>Sintomas</span>
+                      <input type="text" placeholder="Ex: cefaleia, fadiga" />
+                    </label>
+                    <label class="field">
+                      <span>Diagnostico (CID-10)</span>
+                      <input type="text" placeholder="I10 - Hipertensao" />
+                    </label>
+                  </div>
+                  <label class="field">
+                    <span>Conduta</span>
+                    <textarea placeholder="Plano de tratamento..."></textarea>
+                  </label>
+                </article>
+
+                <article class="card">
+                  <header class="card-header">
+                    <p class="card-title">Sugestoes da IA</p>
+                    <p class="muted">Feedback ativo do medico</p>
+                  </header>
+                  <div class="ai-list" data-consulta-ai></div>
+                </article>
+              </section>
+
+              <div class="footer-actions">
+                <button class="pill ghost">Salvar rascunho</button>
+                <button class="primary">Finalizar consulta</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="screen" id="populacional">
+          <div class="layout">
+            <aside class="sidebar">
+              <div class="profile">
+                <div class="avatar">GS</div>
+                <div>
+                  <p class="profile-name" data-pop-name>Gestao UBS</p>
+                  <p class="profile-sub" data-pop-sub>2.450 pacientes ativos</p>
+                </div>
+              </div>
+              <div class="menu">
+                <button class="menu-btn is-active">Dashboard</button>
+                <button class="menu-btn">Tendencias</button>
+                <button class="menu-btn">Recursos</button>
+              </div>
+              <button class="cta">+ Nova Acao</button>
+            </aside>
+
+            <div class="content">
+              <section class="grid stagger">
+                <article class="card">
+                  <header class="card-header">
+                    <p class="card-title">Estratificacao de Risco</p>
+                    <button class="ghost">Exportar</button>
+                  </header>
+                  <div class="chart" data-pop-risk></div>
+                </article>
+                <article class="card">
+                  <header class="card-header">
+                    <p class="card-title">Insight prioritario</p>
+                    <span class="tag" data-pop-tag>Acao imediata</span>
+                  </header>
+                  <p class="muted" data-pop-insight>
+                    Grupo de risco (hipertensos &gt; 60 anos) com exames pendentes: 45 pacientes.
+                  </p>
+                  <button class="primary">Enviar lembrete</button>
+                </article>
+                <article class="card">
+                  <header class="card-header">
+                    <p class="card-title">Agendados vs Realizados</p>
+                    <p class="muted">Ultimos 30 dias</p>
+                  </header>
+                  <div class="stat-grid" data-pop-stats></div>
+                </article>
+              </section>
+
+              <section class="grid two stagger">
+                <article class="card">
+                  <header class="card-header">
+                    <p class="card-title">Mapa de risco comunitario</p>
+                    <p class="muted">Atualizacao diaria</p>
+                  </header>
+                  <div class="map">
+                    <div class="map-legend">
+                      <span class="badge danger"></span> Critico
+                      <span class="badge warning"></span> Alerta
+                      <span class="badge success"></span> Controlado
+                    </div>
+                  </div>
+                </article>
+                <article class="card">
+                  <header class="card-header">
+                    <p class="card-title">Alertas de manutencao</p>
+                    <p class="muted">Equipe e insumos</p>
+                  </header>
+                  <ul class="list" data-pop-maintenance></ul>
+                </article>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <section class="screen" id="paciente">
+          <div class="patient-shell">
+            <div class="patient-header">
+              <p class="brand-name">HealthTwin</p>
+              <nav class="patient-nav">
+                <button class="nav-btn is-active">Meu relatorio</button>
+                <button class="nav-btn">Dicas de saude</button>
+                <button class="nav-btn">Contatos</button>
+              </nav>
+              <button class="pill">Sair</button>
+            </div>
+
+            <section class="patient-body">
+              <div>
+                <h2 data-patient-greeting>Ola, Sr. Joao</h2>
+                <p class="muted" data-patient-summary>
+                  Aqui esta o resumo do encontro de hoje. Voce esta indo muito bem no seu cuidado.
+                </p>
+              </div>
+
+              <div class="patient-grid stagger">
+                <article class="card">
+                  <header class="card-header">
+                    <p class="card-title">Minha pontuacao de saude</p>
+                  </header>
+                  <div class="score-ring large">
+                    <div>
+                      <p class="score-number" data-patient-score>75</p>
+                      <p class="muted" data-patient-score-label>Nivel excelente</p>
+                    </div>
+                  </div>
+                  <p class="muted" data-patient-score-text>
+                    Sua energia e batimentos estao em harmonia.
+                  </p>
+                </article>
+                <article class="card">
+                  <header class="card-header">
+                    <p class="card-title">Plano de acao para hoje</p>
+                  </header>
+                  <div class="stack" data-patient-plan></div>
+                </article>
+                <article class="card highlight">
+                  <header class="card-header">
+                    <p class="card-title">Dica do coracao</p>
+                  </header>
+                  <p data-patient-tip>
+                    Beber um copo de agua a cada 2 horas ajuda seu corpo a manter a pressao
+                    equilibrada.
+                  </p>
+                </article>
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="demo-hint" id="demoHint" aria-live="polite">
+      <p class="demo-title">Modo demo</p>
+      <p class="demo-text">Destaque automatico dos pontos principais.</p>
+      <div class="demo-progress">
+        <span></span>
+      </div>
+    </div>
+
+    <script src="../src/app.js"></script>
+  </body>
+</html>
