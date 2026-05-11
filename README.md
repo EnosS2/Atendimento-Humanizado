@@ -41,5 +41,5 @@ superior, a sidebar e os grids para manter a leitura clara.
 ## Design system (Empathetic Care)
 
 - Paleta: azul e verde como base, com acentos em laranja e vermelho.
-- Tipografia: Manrope (titulos) e Atkinson Hyperlegible (corpo).
+- Tipografia: Noto Sans (principal) e Atkinson Hyperlegible (apoio).
 - Componentes: cards arredondados, sombras suaves e estados de alerta claros.
