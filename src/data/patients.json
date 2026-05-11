@@ -125,5 +125,44 @@
       }
     ],
     "tip": "Beber um copo de agua a cada 2 horas ajuda seu corpo a manter a pressao equilibrada."
+  },
+  "bodyMap": {
+    "patient": {
+      "name": "Joao Delgado",
+      "age": 45,
+      "bed": "Leito 204",
+      "initials": "JD"
+    },
+    "current": {
+      "location": "Ombro direito / Abdominal",
+      "intensity": 7,
+      "sensations": ["Burning", "Sharp", "Tingling"],
+      "notes": "Sem febre. Dor aumenta a noite."
+    },
+    "points": {
+      "front": [
+        { "x": 62, "y": 42, "tone": "primary", "label": "Ombro direito" },
+        { "x": 55, "y": 58, "tone": "secondary", "label": "Abdominal" }
+      ],
+      "back": [
+        { "x": 48, "y": 40, "tone": "primary", "label": "Escapula" }
+      ]
+    },
+    "history": [
+      {
+        "date": "Ontem",
+        "title": "Dor abdominal",
+        "intensity": 4,
+        "sensation": "Dull",
+        "tone": "ok"
+      },
+      {
+        "date": "12 Out",
+        "title": "Ombro direito",
+        "intensity": 8,
+        "sensation": "Sharp",
+        "tone": "alert"
+      }
+    ]
   }
 }

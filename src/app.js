@@ -128,6 +128,45 @@ const defaultData = {
     ],
     tip: "Beber um copo de agua a cada 2 horas ajuda seu corpo a manter a pressao equilibrada.",
   },
+  bodyMap: {
+    patient: {
+      name: "Joao Delgado",
+      age: 45,
+      bed: "Leito 204",
+      initials: "JD",
+    },
+    current: {
+      location: "Ombro direito / Abdominal",
+      intensity: 7,
+      sensations: ["Burning", "Sharp", "Tingling"],
+      notes: "Sem febre. Dor aumenta a noite.",
+    },
+    points: {
+      front: [
+        { x: 62, y: 42, tone: "primary", label: "Ombro direito" },
+        { x: 55, y: 58, tone: "secondary", label: "Abdominal" },
+      ],
+      back: [
+        { x: 48, y: 40, tone: "primary", label: "Escapula" },
+      ],
+    },
+    history: [
+      {
+        date: "Ontem",
+        title: "Dor abdominal",
+        intensity: 4,
+        sensation: "Dull",
+        tone: "ok",
+      },
+      {
+        date: "12 Out",
+        title: "Ombro direito",
+        intensity: 8,
+        sensation: "Sharp",
+        tone: "alert",
+      },
+    ],
+  },
 };
 
 const demoSteps = [
@@ -349,6 +388,145 @@ function renderPaciente(data) {
     .join("");
 }
 
+function renderBodyMap(data) {
+  const nameEl = document.querySelector("[data-bodymap-name]");
+  const subEl = document.querySelector("[data-bodymap-sub]");
+  const initialsEl = document.querySelector("[data-bodymap-initials]");
+  if (nameEl) {
+    nameEl.textContent = data.patient.name;
+  }
+  if (subEl) {
+    subEl.textContent = `${data.patient.age} anos - ${data.patient.bed}`;
+  }
+  if (initialsEl) {
+    initialsEl.textContent = data.patient.initials;
+  }
+
+  const locationEl = document.querySelector("[data-bodymap-location]");
+  const intensityEl = document.querySelector("[data-bodymap-intensity]");
+  const intensityBar = document.querySelector("[data-bodymap-intensity-bar]");
+  const sensationsEl = document.querySelector("[data-bodymap-sensations]");
+  const notesEl = document.querySelector("[data-bodymap-notes]");
+
+  const updateCurrentLocation = (label, dotElement) => {
+    if (locationEl) {
+      locationEl.textContent = label;
+    }
+    document.querySelectorAll(".bodymap-dot").forEach((dot) => {
+      dot.classList.toggle("is-active", dot === dotElement);
+    });
+  };
+
+  if (locationEl) {
+    locationEl.textContent = data.current.location;
+  }
+  if (intensityEl) {
+    intensityEl.textContent = `${data.current.intensity}/10`;
+  }
+  if (intensityBar) {
+    intensityBar.style.width = `${data.current.intensity * 10}%`;
+  }
+  if (sensationsEl) {
+    sensationsEl.innerHTML = data.current.sensations
+      .map((item) => `<span class="chip">${item}</span>`)
+      .join("");
+  }
+  if (notesEl) {
+    notesEl.textContent = data.current.notes;
+  }
+
+  const frontDots = document.querySelector("[data-bodymap-dots=\"front\"]");
+  const backDots = document.querySelector("[data-bodymap-dots=\"back\"]");
+  const createDot = (point, extraClass = "") => {
+    const tone = point.tone === "secondary" ? " secondary" : "";
+    return `<button class="bodymap-dot${tone}${extraClass}" type="button" data-label="${point.label}" style="left:${point.x}%; top:${point.y}%;" title="${point.label}" aria-label="${point.label}"></button>`;
+  };
+
+  if (frontDots) {
+    frontDots.innerHTML = data.points.front
+      .map((point) => createDot(point))
+      .join("");
+  }
+  if (backDots) {
+    backDots.innerHTML = data.points.back
+      .map((point) => createDot(point))
+      .join("");
+  }
+
+  const bindBodyMapDots = () => {
+    document.querySelectorAll(".bodymap-dot").forEach((dot) => {
+      dot.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const label = dot.dataset.label || data.current.location;
+        updateCurrentLocation(label, dot);
+      });
+    });
+  };
+
+  const inferRegion = (x, y, view) => {
+    const side = x < 43 ? "esquerdo" : x > 57 ? "direito" : "central";
+    const viewLabel = view === "back" ? "posterior" : "frontal";
+    if (y < 20) return `Cabeca - vista ${viewLabel}`;
+    if (y < 39) return side === "central" ? `Torax - vista ${viewLabel}` : `Ombro ${side}`;
+    if (y < 58) return side === "central" ? `Abdomen - vista ${viewLabel}` : `Braco ${side}`;
+    if (y < 77) return side === "central" ? `Quadril - vista ${viewLabel}` : `Coxa ${side}`;
+    return side === "central" ? `Pernas - vista ${viewLabel}` : `Perna ${side}`;
+  };
+
+  bindBodyMapDots();
+  const initialDot = Array.from(document.querySelectorAll(".bodymap-dot")).find((dot) =>
+    data.current.location.includes(dot.dataset.label)
+  );
+  if (initialDot) {
+    initialDot.classList.add("is-active");
+  }
+
+  document.querySelectorAll("[data-bodymap-figure]").forEach((figure) => {
+    figure.addEventListener("click", (event) => {
+      const rect = figure.getBoundingClientRect();
+      const x = Math.max(12, Math.min(88, ((event.clientX - rect.left) / rect.width) * 100));
+      const y = Math.max(14, Math.min(92, ((event.clientY - rect.top) / rect.height) * 100));
+      const view = figure.dataset.bodymapFigure;
+      const label = inferRegion(x, y, view);
+      const dotsLayer = figure.querySelector("[data-bodymap-dots]");
+      if (!dotsLayer) return;
+
+      const previousMark = dotsLayer.querySelector(".bodymap-dot.user-mark");
+      if (previousMark) {
+        previousMark.remove();
+      }
+
+      dotsLayer.insertAdjacentHTML("beforeend", createDot({ label, x, y }, " user-mark"));
+      const newDot = dotsLayer.querySelector(".bodymap-dot.user-mark");
+      if (newDot) {
+        newDot.addEventListener("click", (dotEvent) => {
+          dotEvent.stopPropagation();
+          updateCurrentLocation(label, newDot);
+        });
+        updateCurrentLocation(label, newDot);
+      }
+    });
+  });
+
+  const historyEl = document.querySelector("[data-bodymap-history]");
+  if (historyEl) {
+    historyEl.innerHTML = data.history
+      .map((item) => {
+        const marker = item.tone === "alert" ? "history-marker alert" : "history-marker";
+        return `
+        <li>
+          <span class="${marker}"></span>
+          <div>
+            <p class="event">${item.date} - ${item.title}</p>
+            <p class="muted">Intensidade: ${item.intensity} | Sensacao: ${item.sensation}</p>
+          </div>
+        </li>
+      `;
+      })
+      .join("");
+  }
+}
+
 function bindAiActions() {
   const aiCards = document.querySelectorAll(".ai-card");
   aiCards.forEach((card) => {
@@ -372,6 +550,7 @@ function renderAll(data) {
   renderConsulta(data.consulta);
   renderPopulacional(data.populacional);
   renderPaciente(data.paciente);
+  renderBodyMap(data.bodyMap);
   bindAiActions();
   applyStagger(document.querySelector(".screen.is-visible"));
 }
@@ -438,6 +617,21 @@ demoToggle.addEventListener("click", () => {
   } else {
     startDemo();
   }
+});
+
+const bodyMapTabs = document.querySelectorAll("[data-bodymap-view]");
+const bodyMapFigures = document.querySelectorAll("[data-bodymap-figure]");
+
+bodyMapTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    const targetView = tab.dataset.bodymapView;
+    bodyMapTabs.forEach((button) => {
+      button.classList.toggle("is-active", button.dataset.bodymapView === targetView);
+    });
+    bodyMapFigures.forEach((figure) => {
+      figure.classList.toggle("is-active", figure.dataset.bodymapFigure === targetView);
+    });
+  });
 });
 
 async function loadData() {

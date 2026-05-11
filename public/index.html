@@ -19,6 +19,7 @@
         <nav class="top-nav">
           <button class="nav-btn is-active" data-screen="dashboard">Dashboard</button>
           <button class="nav-btn" data-screen="consulta">Consulta</button>
+          <button class="nav-btn" data-screen="bodymap">Body Map</button>
           <button class="nav-btn" data-screen="populacional">Populacao</button>
           <button class="nav-btn" data-screen="paciente">Paciente</button>
         </nav>
@@ -170,6 +171,114 @@
                 <button class="pill ghost">Salvar rascunho</button>
                 <button class="primary">Finalizar consulta</button>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="screen" id="bodymap">
+          <div class="layout">
+            <aside class="sidebar">
+              <div class="profile">
+                <div class="avatar" data-bodymap-initials>JD</div>
+                <div>
+                  <p class="profile-name" data-bodymap-name>Joao Delgado</p>
+                  <p class="profile-sub" data-bodymap-sub>45 anos - Leito 204</p>
+                </div>
+              </div>
+              <div class="menu">
+                <button class="menu-btn">Dashboard</button>
+                <button class="menu-btn is-active">Clinical Consultation</button>
+                <button class="menu-btn">Unit Management</button>
+                <button class="menu-btn">Reports</button>
+              </div>
+              <button class="cta">+ New Consultation</button>
+            </aside>
+
+            <div class="content">
+              <section class="grid two stagger">
+                <article class="card">
+                  <header class="card-header">
+                    <p class="card-title">Mapeamento Anatomico</p>
+                    <div class="bodymap-tabs">
+                      <button class="tab is-active" data-bodymap-view="front">
+                        Vista Frontal
+                      </button>
+                      <button class="tab" data-bodymap-view="back">Vista Posterior</button>
+                    </div>
+                  </header>
+                  <div class="bodymap-stage">
+                    <div class="body-figure is-active" data-bodymap-figure="front">
+                      <svg viewBox="0 0 180 320" role="img" aria-label="Vista frontal do corpo">
+                        <path class="body-shadow" d="M90 19c15 0 27 12 27 27s-12 27-27 27-27-12-27-27 12-27 27-27Zm-27 72c0-18 12-31 27-31s27 13 27 31v73c0 17-12 30-27 30s-27-13-27-30V91Zm-39 21c0-12 8-22 19-22s18 9 18 21v97c0 12-8 22-18 22s-19-9-19-22v-96Zm95-1c0-12 8-21 18-21s19 10 19 22v96c0 13-8 22-19 22s-18-10-18-22v-97ZM60 193c14 0 25 11 25 25v70c0 15-10 27-24 27s-24-12-24-27v-70c0-14 10-25 23-25Zm60 0c13 0 23 11 23 25v70c0 15-10 27-24 27s-24-12-24-27v-70c0-14 11-25 25-25Z" />
+                        <circle class="body-part" cx="90" cy="43" r="25" />
+                        <path class="body-part" d="M63 92c0-18 12-31 27-31s27 13 27 31v71c0 17-12 30-27 30s-27-13-27-30V92Z" />
+                        <path class="body-part body-part-soft" d="M68 98h44M68 132h44M75 166h30" />
+                        <path class="body-part" d="M25 113c0-13 8-23 19-23s18 10 18 22v94c0 13-8 23-19 23s-18-10-18-23v-93Z" />
+                        <path class="body-part" d="M118 112c0-12 8-22 18-22s19 10 19 23v93c0 13-8 23-18 23s-19-10-19-23v-94Z" />
+                        <path class="body-part" d="M60 191c14 0 25 11 25 25v70c0 16-10 28-24 28s-24-12-24-28v-70c0-14 10-25 23-25Z" />
+                        <path class="body-part" d="M120 191c13 0 23 11 23 25v70c0 16-10 28-24 28s-24-12-24-28v-70c0-14 11-25 25-25Z" />
+                      </svg>
+                      <div class="bodymap-dots" data-bodymap-dots="front"></div>
+                    </div>
+                    <div class="body-figure" data-bodymap-figure="back">
+                      <svg viewBox="0 0 180 320" role="img" aria-label="Vista posterior do corpo">
+                        <path class="body-shadow" d="M90 19c15 0 27 12 27 27s-12 27-27 27-27-12-27-27 12-27 27-27Zm-29 73c0-18 13-31 29-31s29 13 29 31v72c0 18-13 31-29 31s-29-13-29-31V92Zm-37 20c0-12 8-22 19-22s18 10 18 22v96c0 13-8 23-18 23s-19-10-19-23v-96Zm95 0c0-12 8-22 18-22s19 10 19 22v96c0 13-8 23-19 23s-18-10-18-23v-96ZM60 193c14 0 25 11 25 25v70c0 15-10 27-24 27s-24-12-24-27v-70c0-14 10-25 23-25Zm60 0c13 0 23 11 23 25v70c0 15-10 27-24 27s-24-12-24-27v-70c0-14 11-25 25-25Z" />
+                        <circle class="body-part" cx="90" cy="43" r="25" />
+                        <path class="body-part" d="M61 92c0-18 13-31 29-31s29 13 29 31v72c0 18-13 31-29 31s-29-13-29-31V92Z" />
+                        <path class="body-part body-part-soft" d="M90 72v112M72 100c7 7 29 7 36 0M72 148c7 8 29 8 36 0" />
+                        <path class="body-part" d="M25 113c0-13 8-23 19-23s18 10 18 22v94c0 13-8 23-19 23s-18-10-18-23v-93Z" />
+                        <path class="body-part" d="M118 112c0-12 8-22 18-22s19 10 19 23v93c0 13-8 23-18 23s-19-10-19-23v-94Z" />
+                        <path class="body-part" d="M60 191c14 0 25 11 25 25v70c0 16-10 28-24 28s-24-12-24-28v-70c0-14 10-25 23-25Z" />
+                        <path class="body-part" d="M120 191c13 0 23 11 23 25v70c0 16-10 28-24 28s-24-12-24-28v-70c0-14 11-25 25-25Z" />
+                      </svg>
+                      <div class="bodymap-dots" data-bodymap-dots="back"></div>
+                    </div>
+                  </div>
+                  <p class="bodymap-help">Clique em uma regiao do corpo para indicar o problema.</p>
+                </article>
+
+                <article class="card">
+                  <header class="card-header">
+                    <p class="card-title">Detalhes da Dor</p>
+                  </header>
+                  <div class="detail-block">
+                    <p class="detail-label">Localizacao da Dor</p>
+                    <div class="detail-pill" data-bodymap-location>Ombro direito / Abdominal</div>
+                  </div>
+                  <div class="detail-block">
+                    <div class="detail-row">
+                      <p class="detail-label">Intensidade (1-10)</p>
+                      <span class="detail-value" data-bodymap-intensity>7/10</span>
+                    </div>
+                    <div class="intensity-bar">
+                      <span data-bodymap-intensity-bar></span>
+                    </div>
+                    <div class="intensity-scale">
+                      <span>Leve</span>
+                      <span>Moderada</span>
+                      <span>Intensa</span>
+                    </div>
+                  </div>
+                  <div class="detail-block">
+                    <p class="detail-label">Tipo de Sensacao</p>
+                    <div class="chip-row" data-bodymap-sensations></div>
+                  </div>
+                  <div class="detail-block">
+                    <p class="detail-label">Observacao</p>
+                    <p class="muted" data-bodymap-notes>Sem febre. Dor aumenta a noite.</p>
+                  </div>
+                  <button class="primary">Registrar Observacao</button>
+                </article>
+              </section>
+
+              <section class="grid stagger">
+                <article class="card">
+                  <header class="card-header">
+                    <p class="card-title">Historico Recente</p>
+                  </header>
+                  <ul class="history" data-bodymap-history></ul>
+                </article>
+              </section>
             </div>
           </div>
         </section>
