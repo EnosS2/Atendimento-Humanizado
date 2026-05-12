@@ -138,7 +138,7 @@ const defaultData = {
     current: {
       location: "Ombro direito / Abdominal",
       intensity: 7,
-      sensations: ["Burning", "Sharp", "Tingling"],
+      sensations: ["Queimacao", "Aguda", "Formigamento"],
       notes: "Sem febre. Dor aumenta a noite.",
     },
     points: {
@@ -155,14 +155,14 @@ const defaultData = {
         date: "Ontem",
         title: "Dor abdominal",
         intensity: 4,
-        sensation: "Dull",
+        sensation: "Surda",
         tone: "ok",
       },
       {
         date: "12 Out",
         title: "Ombro direito",
         intensity: 8,
-        sensation: "Sharp",
+        sensation: "Aguda",
         tone: "alert",
       },
     ],

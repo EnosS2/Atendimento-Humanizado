@@ -20,11 +20,11 @@ Gestao de Saude Populacional e Relatorio do Paciente.
 
 ## Principais funcionalidades
 
-- Dashboard do Profissional: score global, linha do tempo clinica e alertas.
+- Painel do Profissional: score global, linha do tempo clinica e alertas.
 - Registro de Atendimento Clinico: campos de escuta ativa e sugestoes da IA.
 - Gestao de Saude Populacional: estratificacao de risco e alertas coletivos.
 - Relatorio do Paciente: linguagem simples com plano de acao e dicas.
-- Body Map: analise visual da dor com marcacao no corpo e historico recente.
+- Mapa Corporal: analise visual da dor com marcacao no corpo e historico recente.
 - Modo demonstracao: tour automatico destacando pontos principais.
 - Dados dinamicos: toda a UI e populada pelo arquivo JSON.
 
